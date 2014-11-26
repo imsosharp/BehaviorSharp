@@ -1,10 +1,31 @@
-﻿using System;
+﻿#region LICENSE
+
+// Copyright 2014 - 2014 BehaviorSharpTests
+// CompositesTests.cs is part of BehaviorSharpTests.
+// BehaviorSharpTests is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// BehaviorSharpTests is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// You should have received a copy of the GNU General Public License
+// along with BehaviorSharpTests. If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region
+
+using System;
 using BehaviorSharp;
 using BehaviorSharp.Components.Actions;
 using BehaviorSharp.Components.Composites;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace BehaviorSharpTest
+#endregion
+
+namespace BehaviorSharpTests
 {
     [TestClass]
     public class CompositesTests
@@ -43,12 +64,12 @@ namespace BehaviorSharpTest
 
                         return BehaviorState.Failure;
                     })
-            );
+                    );
 
             var statefulSelectorError =
                 new StatefulSelector(
                     new BehaviorAction(() => { throw new Exception("Failure"); })
-            );
+                    );
 
             // test init
             Assert.IsTrue(first, "init first");
@@ -92,15 +113,15 @@ namespace BehaviorSharpTest
                             return BehaviorState.Running;
                         }
 
-                        return BehaviorState.Success;;
+                        return BehaviorState.Success;
                     }),
                     new BehaviorAction(() => BehaviorState.Success)
-            );
+                    );
 
             var statefulSequenceError =
                 new StatefulSequence(
                     new BehaviorAction(() => { throw new Exception("Failure"); })
-            );
+                    );
 
             // test init
             Assert.IsTrue(first, "init first");

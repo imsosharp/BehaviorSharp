@@ -1,4 +1,25 @@
+#region LICENSE
+
+// Copyright 2014 - 2014 BehaviorSharp
+// StatefulSequence.cs is part of BehaviorSharp.
+// BehaviorSharp is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// BehaviorSharp is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// You should have received a copy of the GNU General Public License
+// along with BehaviorSharp. If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region
+
 using System;
+
+#endregion
 
 namespace BehaviorSharp.Components.Composites
 {
@@ -8,10 +29,10 @@ namespace BehaviorSharp.Components.Composites
         public int LastBehavior { get; private set; }
 
         /// <summary>
-        /// attempts to run the behaviors all in one cycle (stateful on running)
-        /// -Returns Success when all are successful
-        /// -Returns Failure if one behavior fails or an error occurs
-        /// -Does not Return Running
+        ///     attempts to run the behaviors all in one cycle (stateful on running)
+        ///     -Returns Success when all are successful
+        ///     -Returns Failure if one behavior fails or an error occurs
+        ///     -Does not Return Running
         /// </summary>
         /// <param name="behaviors"></param>
         public StatefulSequence(params BehaviorComponent[] behaviors)
@@ -20,7 +41,7 @@ namespace BehaviorSharp.Components.Composites
         }
 
         /// <summary>
-        /// performs the given behavior
+        ///     performs the given behavior
         /// </summary>
         /// <returns>the behaviors return code</returns>
         public override BehaviorState Tick()
@@ -62,8 +83,5 @@ namespace BehaviorSharp.Components.Composites
             State = BehaviorState.Success;
             return State;
         }
-
-
     }
 }
-

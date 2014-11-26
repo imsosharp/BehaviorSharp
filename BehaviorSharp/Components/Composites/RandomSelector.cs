@@ -1,4 +1,25 @@
-﻿using System;
+﻿#region LICENSE
+
+// Copyright 2014 - 2014 BehaviorSharp
+// RandomSelector.cs is part of BehaviorSharp.
+// BehaviorSharp is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// BehaviorSharp is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// You should have received a copy of the GNU General Public License
+// along with BehaviorSharp. If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region
+
+using System;
+
+#endregion
 
 namespace BehaviorSharp.Components.Composites
 {
@@ -8,10 +29,10 @@ namespace BehaviorSharp.Components.Composites
         private Random _random = new Random(DateTime.Now.Millisecond);
 
         /// <summary>
-        /// Randomly selects and performs one of the passed behaviors
-        /// -Returns Success if selected behavior returns Success
-        /// -Returns Failure if selected behavior returns Failure
-        /// -Returns Running if selected behavior returns Running
+        ///     Randomly selects and performs one of the passed behaviors
+        ///     -Returns Success if selected behavior returns Success
+        ///     -Returns Failure if selected behavior returns Failure
+        ///     -Returns Running if selected behavior returns Running
         /// </summary>
         /// <param name="behaviors">one to many behavior components</param>
         public RandomSelector(params BehaviorComponent[] behaviors)
@@ -20,7 +41,7 @@ namespace BehaviorSharp.Components.Composites
         }
 
         /// <summary>
-        /// performs the given behavior
+        ///     performs the given behavior
         /// </summary>
         /// <returns>the behaviors return code</returns>
         public override BehaviorState Tick()
