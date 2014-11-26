@@ -23,28 +23,28 @@ namespace BehaviorSharp.Components.Composites
         /// performs the given behavior
         /// </summary>
         /// <returns>the behaviors return code</returns>
-        public override BehaviorReturnCode Behave()
+        public override BehaviorState Tick()
         {
             //start from last remembered position
             for (; _lastBehavior < _behaviors.Length; _lastBehavior++)
             {
                 try
                 {
-                    switch (_behaviors[_lastBehavior].Behave())
+                    switch (_behaviors[_lastBehavior].Tick())
                     {
-                        case BehaviorReturnCode.Failure:
+                        case BehaviorState.Failure:
                             _lastBehavior = 0;
-                            ReturnCode = BehaviorReturnCode.Failure;
-                            return ReturnCode;
-                        case BehaviorReturnCode.Success:
+                            State = BehaviorState.Failure;
+                            return State;
+                        case BehaviorState.Success:
                             continue;
-                        case BehaviorReturnCode.Running:
-                            ReturnCode = BehaviorReturnCode.Running;
-                            return ReturnCode;
+                        case BehaviorState.Running:
+                            State = BehaviorState.Running;
+                            return State;
                         default:
                             _lastBehavior = 0;
-                            ReturnCode = BehaviorReturnCode.Success;
-                            return ReturnCode;
+                            State = BehaviorState.Success;
+                            return State;
                     }
                 }
                 catch (Exception e)
@@ -53,14 +53,14 @@ namespace BehaviorSharp.Components.Composites
                     Console.Error.WriteLine(e.ToString());
 #endif
                     _lastBehavior = 0;
-                    ReturnCode = BehaviorReturnCode.Failure;
-                    return ReturnCode;
+                    State = BehaviorState.Failure;
+                    return State;
                 }
             }
 
             _lastBehavior = 0;
-            ReturnCode = BehaviorReturnCode.Success;
-            return ReturnCode;
+            State = BehaviorState.Success;
+            return State;
         }
 
 

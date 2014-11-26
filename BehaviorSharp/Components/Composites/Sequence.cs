@@ -22,7 +22,7 @@ namespace BehaviorSharp.Components.Composites
         /// performs the given behavior
         /// </summary>
         /// <returns>the behaviors return code</returns>
-        public override BehaviorReturnCode Behave()
+        public override BehaviorState Tick()
         {
             //add watch for any running behaviors
             var anyRunning = false;
@@ -31,19 +31,19 @@ namespace BehaviorSharp.Components.Composites
             {
                 try
                 {
-                    switch (t.Behave())
+                    switch (t.Tick())
                     {
-                        case BehaviorReturnCode.Failure:
-                            ReturnCode = BehaviorReturnCode.Failure;
-                            return ReturnCode;
-                        case BehaviorReturnCode.Success:
+                        case BehaviorState.Failure:
+                            State = BehaviorState.Failure;
+                            return State;
+                        case BehaviorState.Success:
                             continue;
-                        case BehaviorReturnCode.Running:
+                        case BehaviorState.Running:
                             anyRunning = true;
                             continue;
                         default:
-                            ReturnCode = BehaviorReturnCode.Success;
-                            return ReturnCode;
+                            State = BehaviorState.Success;
+                            return State;
                     }
                 }
                 catch (Exception e)
@@ -51,14 +51,14 @@ namespace BehaviorSharp.Components.Composites
 #if DEBUG
                     Console.Error.WriteLine(e.ToString());
 #endif
-                    ReturnCode = BehaviorReturnCode.Failure;
-                    return ReturnCode;
+                    State = BehaviorState.Failure;
+                    return State;
                 }
             }
 
             //if none running, return success, otherwise return running
-            ReturnCode = !anyRunning ? BehaviorReturnCode.Success : BehaviorReturnCode.Running;
-            return ReturnCode;
+            State = !anyRunning ? BehaviorState.Success : BehaviorState.Running;
+            return State;
         }
 
 

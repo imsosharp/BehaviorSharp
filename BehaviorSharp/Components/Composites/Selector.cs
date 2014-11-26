@@ -23,22 +23,22 @@ namespace BehaviorSharp.Components.Composites
         /// performs the given behavior
         /// </summary>
         /// <returns>the behaviors return code</returns>
-        public override BehaviorReturnCode Behave()
+        public override BehaviorState Tick()
         {
             foreach (var t in Behaviors)
             {
                 try
                 {
-                    switch (t.Behave())
+                    switch (t.Tick())
                     {
-                        case BehaviorReturnCode.Failure:
+                        case BehaviorState.Failure:
                             continue;
-                        case BehaviorReturnCode.Success:
-                            ReturnCode = BehaviorReturnCode.Success;
-                            return ReturnCode;
-                        case BehaviorReturnCode.Running:
-                            ReturnCode = BehaviorReturnCode.Running;
-                            return ReturnCode;
+                        case BehaviorState.Success:
+                            State = BehaviorState.Success;
+                            return State;
+                        case BehaviorState.Running:
+                            State = BehaviorState.Running;
+                            return State;
                         default:
                             continue;
                     }
@@ -51,8 +51,8 @@ namespace BehaviorSharp.Components.Composites
                 }
             }
 
-            ReturnCode = BehaviorReturnCode.Failure;
-            return ReturnCode;
+            State = BehaviorState.Failure;
+            return State;
         }
     }
 }

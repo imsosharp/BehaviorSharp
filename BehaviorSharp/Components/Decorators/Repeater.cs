@@ -1,6 +1,6 @@
 namespace BehaviorSharp.Components.Decorators
 {
-    public class RepeatUntilFail : BehaviorComponent
+    public class Repeater : BehaviorComponent
     {
         private readonly BehaviorComponent _behavior;
 
@@ -8,7 +8,7 @@ namespace BehaviorSharp.Components.Decorators
         /// executes the behavior every time again
         /// </summary>
         /// <param name="behavior">behavior to run</param>
-        public RepeatUntilFail(BehaviorComponent behavior)
+        public Repeater(BehaviorComponent behavior)
         {
             _behavior = behavior;
         }
@@ -17,16 +17,11 @@ namespace BehaviorSharp.Components.Decorators
         /// performs the given behavior
         /// </summary>
         /// <returns>the behaviors return code</returns>
-        public override BehaviorReturnCode Behave()
+        public override BehaviorState Tick()
         {
-            ReturnCode = _behavior.Behave();
-            if (ReturnCode == BehaviorReturnCode.Failure)
-            {
-                return BehaviorReturnCode.Failure;
-            }
-
-            ReturnCode = BehaviorReturnCode.Running;
-            return BehaviorReturnCode.Running;
+            State = _behavior.Tick();
+            State = BehaviorState.Running;
+            return BehaviorState.Running;
         }
     }
 }

@@ -13,7 +13,7 @@ namespace BehaviorSharp.Components.Utility
             _utilityFunction = utilityFunction;
         }
 
-        public override BehaviorReturnCode Behave()
+        public override BehaviorState Tick()
         {
             try
             {
@@ -38,23 +38,23 @@ namespace BehaviorSharp.Components.Utility
                 if (bestMatch == null)
                 {
 #if DEBUG
-                    Console.WriteLine("bestMatch not defined...");
+                    Console.WriteLine("bestMatch not defined :(");
 #endif
-                    ReturnCode = BehaviorReturnCode.Failure;
-                    return ReturnCode;
+                    State = BehaviorState.Failure;
+                    return State;
                 }
 
                 //execute best pair match and return result
-                ReturnCode = bestMatch.Behavior.Behave();
-                return ReturnCode;
+                State = bestMatch.Behavior.Tick();
+                return State;
             }
             catch (Exception e)
             {
 #if DEBUG
                 Console.WriteLine(e.ToString());
 #endif
-                ReturnCode = BehaviorReturnCode.Failure;
-                return BehaviorReturnCode.Failure;
+                State = BehaviorState.Failure;
+                return BehaviorState.Failure;
             }
         }
     }

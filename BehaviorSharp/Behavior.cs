@@ -4,21 +4,21 @@ using BehaviorSharp.Components.Composites;
 
 namespace BehaviorSharp
 {
-    public enum BehaviorReturnCode
+    public enum BehaviorState
     {
         Failure,
         Success,
         Running
     }
 
-    public delegate BehaviorReturnCode BehaviorReturn();
+    public delegate BehaviorState BehaviorReturn();
 
     /// <summary>
     /// 
     /// </summary>
     public class Behavior
     {
-        public BehaviorReturnCode ReturnCode { get; set; }
+        public BehaviorState State { get; set; }
 
         private readonly BehaviorComponent _root;
 
@@ -39,24 +39,24 @@ namespace BehaviorSharp
         /// <summary>
         /// perform the behavior
         /// </summary>
-        public BehaviorReturnCode Behave()
+        public BehaviorState Tick()
         {
             try
             {
-                switch (_root.Behave())
+                switch (_root.Tick())
                 {
-                    case BehaviorReturnCode.Failure:
-                        ReturnCode = BehaviorReturnCode.Failure;
-                        return ReturnCode;
-                    case BehaviorReturnCode.Success:
-                        ReturnCode = BehaviorReturnCode.Success;
-                        return ReturnCode;
-                    case BehaviorReturnCode.Running:
-                        ReturnCode = BehaviorReturnCode.Running;
-                        return ReturnCode;
+                    case BehaviorState.Failure:
+                        State = BehaviorState.Failure;
+                        return State;
+                    case BehaviorState.Success:
+                        State = BehaviorState.Success;
+                        return State;
+                    case BehaviorState.Running:
+                        State = BehaviorState.Running;
+                        return State;
                     default:
-                        ReturnCode = BehaviorReturnCode.Running;
-                        return ReturnCode;
+                        State = BehaviorState.Running;
+                        return State;
                 }
             }
             catch (Exception e)
@@ -64,8 +64,8 @@ namespace BehaviorSharp
 #if DEBUG
                 Console.Error.WriteLine(e.ToString());
 #endif
-                ReturnCode = BehaviorReturnCode.Failure;
-                return ReturnCode;
+                State = BehaviorState.Failure;
+                return State;
             }
         }
     }

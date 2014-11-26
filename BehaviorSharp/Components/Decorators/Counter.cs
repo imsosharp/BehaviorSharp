@@ -25,28 +25,28 @@ namespace BehaviorSharp.Components.Decorators
         /// performs the given behavior
         /// </summary>
         /// <returns>the behaviors return code</returns>
-        public override BehaviorReturnCode Behave()
+        public override BehaviorState Tick()
         {
             try
             {
                 if (_counter < _maxCount)
                 {
                     _counter++;
-                    ReturnCode = BehaviorReturnCode.Running;
-                    return BehaviorReturnCode.Running;
+                    State = BehaviorState.Running;
+                    return BehaviorState.Running;
                 }
 
                 _counter = 0;
-                ReturnCode = _behavior.Behave();
-                return ReturnCode;
+                State = _behavior.Tick();
+                return State;
             }
             catch (Exception e)
             {
 #if DEBUG
                 Console.Error.WriteLine(e.ToString());
 #endif
-                ReturnCode = BehaviorReturnCode.Failure;
-                return BehaviorReturnCode.Failure;
+                State = BehaviorState.Failure;
+                return BehaviorState.Failure;
             }
         }
     }

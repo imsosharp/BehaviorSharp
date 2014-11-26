@@ -26,7 +26,7 @@ namespace BehaviorSharp.Components.Decorators
         /// performs the given behavior
         /// </summary>
         /// <returns>the behaviors return code</returns>
-        public override BehaviorReturnCode Behave()
+        public override BehaviorState Tick()
         {
             try
             {
@@ -35,20 +35,20 @@ namespace BehaviorSharp.Components.Decorators
                 if (_timeElapsed >= _waitTime)
                 {
                     _timeElapsed = 0;
-                    ReturnCode = _behavior.Behave();
-                    return ReturnCode;
+                    State = _behavior.Tick();
+                    return State;
                 }
 
-                ReturnCode = BehaviorReturnCode.Running;
-                return BehaviorReturnCode.Running;
+                State = BehaviorState.Running;
+                return BehaviorState.Running;
             }
             catch (Exception e)
             {
 #if DEBUG
                 Console.Error.WriteLine(e.ToString());
 #endif
-                ReturnCode = BehaviorReturnCode.Failure;
-                return BehaviorReturnCode.Failure;
+                State = BehaviorState.Failure;
+                return BehaviorState.Failure;
             }
         }
     }

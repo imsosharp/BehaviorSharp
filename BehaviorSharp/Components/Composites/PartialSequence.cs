@@ -9,7 +9,7 @@ namespace BehaviorSharp.Components.Composites
         private readonly short _seqLength;
 
         /// <summary>
-        /// Performs the given behavior components sequentially (one evaluation per Behave call)
+        /// Performs the given behavior components sequentially (one evaluation per Tick call)
         /// Performs an AND-Like behavior and will perform each successive component
         /// -Returns Success if all behavior components return Success
         /// -Returns Running if an individual behavior component returns Success or Running
@@ -26,26 +26,26 @@ namespace BehaviorSharp.Components.Composites
         /// performs the given behavior
         /// </summary>
         /// <returns>the behaviors return code</returns>
-        public override BehaviorReturnCode Behave()
+        public override BehaviorState Tick()
         {
             //while you can go through them, do so
             while (_sequence < _seqLength)
             {
                 try
                 {
-                    switch (Behaviors[_sequence].Behave())
+                    switch (Behaviors[_sequence].Tick())
                     {
-                        case BehaviorReturnCode.Failure:
+                        case BehaviorState.Failure:
                             _sequence = 0;
-                            ReturnCode = BehaviorReturnCode.Failure;
-                            return ReturnCode;
-                        case BehaviorReturnCode.Success:
+                            State = BehaviorState.Failure;
+                            return State;
+                        case BehaviorState.Success:
                             _sequence++;
-                            ReturnCode = BehaviorReturnCode.Running;
-                            return ReturnCode;
-                        case BehaviorReturnCode.Running:
-                            ReturnCode = BehaviorReturnCode.Running;
-                            return ReturnCode;
+                            State = BehaviorState.Running;
+                            return State;
+                        case BehaviorState.Running:
+                            State = BehaviorState.Running;
+                            return State;
                     }
                 }
                 catch (Exception e)
@@ -54,15 +54,15 @@ namespace BehaviorSharp.Components.Composites
                     Console.Error.WriteLine(e.ToString());
 #endif
                     _sequence = 0;
-                    ReturnCode = BehaviorReturnCode.Failure;
-                    return ReturnCode;
+                    State = BehaviorState.Failure;
+                    return State;
                 }
 
             }
 
             _sequence = 0;
-            ReturnCode = BehaviorReturnCode.Success;
-            return ReturnCode;
+            State = BehaviorState.Success;
+            return State;
 
         }
 

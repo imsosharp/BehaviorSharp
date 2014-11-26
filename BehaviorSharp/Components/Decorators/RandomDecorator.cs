@@ -21,26 +21,26 @@ namespace BehaviorSharp.Components.Decorators
             _behavior = behavior;
         }
 
-        public override BehaviorReturnCode Behave()
+        public override BehaviorState Tick()
         {
             try
             {
                 if (_randomFunction.Invoke() <= _probability)
                 {
-                    ReturnCode = _behavior.Behave();
-                    return ReturnCode;
+                    State = _behavior.Tick();
+                    return State;
                 }
 
-                ReturnCode = BehaviorReturnCode.Running;
-                return BehaviorReturnCode.Running;
+                State = BehaviorState.Running;
+                return BehaviorState.Running;
             }
             catch (Exception e)
             {
 #if DEBUG
                 Console.Error.WriteLine(e.ToString());
 #endif
-                ReturnCode = BehaviorReturnCode.Failure;
-                return BehaviorReturnCode.Failure;
+                State = BehaviorState.Failure;
+                return BehaviorState.Failure;
             }
         }
     }

@@ -21,21 +21,21 @@ namespace BehaviorSharp.Components.Conditionals
         /// performs the given behavior
         /// </summary>
         /// <returns>the behaviors return code</returns>
-        public override BehaviorReturnCode Behave()
+        public override BehaviorState Tick()
         {
             try
             {
                 switch (_bool.Invoke())
                 {
                     case true:
-                        ReturnCode = BehaviorReturnCode.Success;
-                        return ReturnCode;
+                        State = BehaviorState.Success;
+                        return State;
                     case false:
-                        ReturnCode = BehaviorReturnCode.Failure;
-                        return ReturnCode;
+                        State = BehaviorState.Failure;
+                        return State;
                     default:
-                        ReturnCode = BehaviorReturnCode.Failure;
-                        return ReturnCode;
+                        State = BehaviorState.Failure;
+                        return State;
                 }
             }
             catch (Exception e)
@@ -43,8 +43,8 @@ namespace BehaviorSharp.Components.Conditionals
 #if DEBUG
                 Console.Error.WriteLine(e.ToString());
 #endif
-                ReturnCode = BehaviorReturnCode.Failure;
-                return ReturnCode;
+                State = BehaviorState.Failure;
+                return State;
             }
         }
     }

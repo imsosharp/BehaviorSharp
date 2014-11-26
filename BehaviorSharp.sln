@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehaviorSharp", "BehaviorSharp.csproj", "{2804E8E4-EDF7-4726-BD7C-7FB4F510FC2F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehaviorSharp", "BehaviorSharp\BehaviorSharp.csproj", "{2804E8E4-EDF7-4726-BD7C-7FB4F510FC2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehaviorSharpTests", "BehaviorSharpTests\BehaviorSharpTests.csproj", "{2DACBA0D-D48D-4447-B561-AFA2008067DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{2804E8E4-EDF7-4726-BD7C-7FB4F510FC2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2804E8E4-EDF7-4726-BD7C-7FB4F510FC2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2804E8E4-EDF7-4726-BD7C-7FB4F510FC2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DACBA0D-D48D-4447-B561-AFA2008067DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DACBA0D-D48D-4447-B561-AFA2008067DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DACBA0D-D48D-4447-B561-AFA2008067DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DACBA0D-D48D-4447-B561-AFA2008067DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
