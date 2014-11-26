@@ -5,7 +5,7 @@ namespace BehaviorSharp.Components.Composites
     public class StatefulSequence : BehaviorComponent
     {
         private readonly BehaviorComponent[] _behaviors;
-        private int _lastBehavior;
+        public int LastBehavior { get; private set; }
 
         /// <summary>
         /// attempts to run the behaviors all in one cycle (stateful on running)
@@ -26,14 +26,14 @@ namespace BehaviorSharp.Components.Composites
         public override BehaviorState Tick()
         {
             //start from last remembered position
-            for (; _lastBehavior < _behaviors.Length; _lastBehavior++)
+            for (; LastBehavior < _behaviors.Length; LastBehavior++)
             {
                 try
                 {
-                    switch (_behaviors[_lastBehavior].Tick())
+                    switch (_behaviors[LastBehavior].Tick())
                     {
                         case BehaviorState.Failure:
-                            _lastBehavior = 0;
+                            LastBehavior = 0;
                             State = BehaviorState.Failure;
                             return State;
                         case BehaviorState.Success:
@@ -42,7 +42,7 @@ namespace BehaviorSharp.Components.Composites
                             State = BehaviorState.Running;
                             return State;
                         default:
-                            _lastBehavior = 0;
+                            LastBehavior = 0;
                             State = BehaviorState.Success;
                             return State;
                     }
@@ -52,13 +52,13 @@ namespace BehaviorSharp.Components.Composites
 #if DEBUG
                     Console.Error.WriteLine(e.ToString());
 #endif
-                    _lastBehavior = 0;
+                    LastBehavior = 0;
                     State = BehaviorState.Failure;
                     return State;
                 }
             }
 
-            _lastBehavior = 0;
+            LastBehavior = 0;
             State = BehaviorState.Success;
             return State;
         }

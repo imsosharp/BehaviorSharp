@@ -5,7 +5,7 @@ namespace BehaviorSharp.Components.Composites
     public class StatefulSelector : BehaviorComponent
     {
         private readonly BehaviorComponent[] _behaviors;
-        private int _lastBehavior;
+        public int LastBehavior { get; private set; }
 
         /// <summary>
         /// Selects among the given behavior components (stateful on running) 
@@ -26,16 +26,16 @@ namespace BehaviorSharp.Components.Composites
         /// <returns>the behaviors return code</returns>
         public override BehaviorState Tick()
         {
-            for (; _lastBehavior < _behaviors.Length; _lastBehavior++)
+            for (; LastBehavior < _behaviors.Length; LastBehavior++)
             {
                 try
                 {
-                    switch (_behaviors[_lastBehavior].Tick())
+                    switch (_behaviors[LastBehavior].Tick())
                     {
                         case BehaviorState.Failure:
                             continue;
                         case BehaviorState.Success:
-                            _lastBehavior = 0;
+                            LastBehavior = 0;
                             State = BehaviorState.Success;
                             return State;
                         case BehaviorState.Running:
@@ -53,7 +53,7 @@ namespace BehaviorSharp.Components.Composites
                 }
             }
 
-            _lastBehavior = 0;
+            LastBehavior = 0;
             State = BehaviorState.Failure;
             return State;
         }
