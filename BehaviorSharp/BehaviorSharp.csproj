@@ -53,9 +53,7 @@
     <Compile Include="Components\Decorators\RepeatUntilFail.cs" />
     <Compile Include="Components\Decorators\Succeeder.cs" />
     <Compile Include="Components\Decorators\Timer.cs" />
-    <Compile Include="Components\Utility\UtilityPair.cs" />
-    <Compile Include="Components\Utility\UtilitySelector.cs" />
-    <Compile Include="Components\Utility\UtilityVector.cs" />
+    <Compile Include="Data\Blackboard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

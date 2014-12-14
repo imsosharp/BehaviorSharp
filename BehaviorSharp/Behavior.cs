@@ -35,6 +35,8 @@ namespace BehaviorSharp
     public delegate BehaviorState BehaviorReturn();
 
     /// <summary>
+    ///     Fork
+    ///     https://github.com/NetGnome/BehaviorLibrary
     /// </summary>
     public class Behavior
     {

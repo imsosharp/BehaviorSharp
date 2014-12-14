@@ -1,7 +1,7 @@
 ﻿#region LICENSE
 
 // Copyright 2014 - 2014 BehaviorSharp
-// UtilityPair.cs is part of BehaviorSharp.
+// Blackboard.cs is part of BehaviorSharp.
 // BehaviorSharp is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -15,17 +15,9 @@
 
 #endregion
 
-namespace BehaviorSharp.Components.Utility
+namespace BehaviorSharp.Data
 {
-    public class UtilityPair
+    public class Blackboard
     {
-        public UtilityVector Vector { get; set; }
-        public BehaviorComponent Behavior { get; set; }
-
-        public UtilityPair(UtilityVector vector, BehaviorComponent behavior)
-        {
-            Vector = vector;
-            Behavior = behavior;
-        }
     }
 }
